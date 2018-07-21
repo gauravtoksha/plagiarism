@@ -4,6 +4,7 @@ Created on Sat Jul 21 02:07:38 2018
 
 @author: windows
 """
+##work in progress
 
 class Similarity():
     

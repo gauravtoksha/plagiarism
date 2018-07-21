@@ -6,21 +6,21 @@ from w3lib.html import remove_tags
 import os
 from bs4 import BeautifulSoup
 import lxml.html
+from BingScraper.searchmanager import SearchManager
 class Bingbot2Spider(scrapy.Spider):
     name = 'bingbot2'
     allowed_domains = []
     
-    def __init__(self,search=None,*args,**kwargs): 
+    def __init__(self,search=None,engine="bing",*args,**kwargs): 
       super(Bingbot2Spider, self).__init__(*args, **kwargs)
-      self.start_urls=['https://www.bing.com/search?q='+re.sub('\s','+',search)]
+      self.sm=SearchManager(engine)
+      self.start_urls=[self.sm.getStartUrl()+re.sub('\s','+',search)]
       self.search=search
       
     def parse(self, response):
-        anchors=response.css("h2")
-        for items in anchors:
-            item=items.css("a::attr(href)").extract()[0]
-            if "pdf" not in item:
-                yield scrapy.Request(item,callback=self.parse1)
+        links=self.sm.getLinks(response)
+        for item in links:
+            yield scrapy.Request(item,callback=self.parse1)
         
     def parse1(self,response):
         page_text=remove_tags(response.text).split('.')

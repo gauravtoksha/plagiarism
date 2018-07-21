@@ -10,8 +10,9 @@ from pathlib import Path
 
 class SpiderHandler():
 
-    def __init__(self,searchText):
+    def __init__(self,searchText,engine):
         self.searchText=searchText
+        self.engine=engine
         
         
         
@@ -24,7 +25,7 @@ class SpiderHandler():
         settings.setmodule(settings_module_path, priority='project')
         try:
             runner = CrawlerRunner(settings)
-            runner.crawl(Bingbot2Spider,search=self.searchText)
+            runner.crawl(Bingbot2Spider,search=self.searchText,engine=self.engine)
         except Exception as e:
             print(e)
         my_file = Path("books1.json")
@@ -46,9 +47,11 @@ class SpiderHandler():
                 
 
 if __name__=="__main__":
-    #exampletext ="""A study was conducted to test the effectiveness of plagiarism detection software in a higher education setting. One part of the study assigned one group of students to write a paper. These students were first educated about plagiarism and informed that their work was to be run through a plagiarism detection system. A second group of students was assigned to write a paper without any information about plagiarism. The researchers expected to find lower rates in group one but found roughly the same rates of plagiarism in both groups."""
-    exampletext="A distributed system is a model in which components located on networked computers communicate and coordinate their actions by passing messages."
-    s=SpiderHandler(exampletext)
+    
+    engine="bing"
+    exampletext ="""A study was conducted to test the effectiveness of plagiarism detection software in a higher education setting. One part of the study assigned one group of students to write a paper. These students were first educated about plagiarism and informed that their work was to be run through a plagiarism detection system. A second group of students was assigned to write a paper without any information about plagiarism. The researchers expected to find lower rates in group one but found roughly the same rates of plagiarism in both groups."""
+    #exampletext="A distributed system is a model in which components located on networked computers communicate and coordinate their actions by passing messages."
+    s=SpiderHandler(exampletext,engine)
     hashmap1=s.run_crawling()
     
     print(hashmap1)
