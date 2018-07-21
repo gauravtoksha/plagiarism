@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+  <title>Plagiarism detection</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <style type="text/css">
+     .hover{
+      background-color: yellow;
+      }
+     .table-responsive {
+    max-height:300px;
+      }
+  </style>
+</head>
+   <body>
+   <div class="container">
+      <h2>Search Query:</h2>
+         {% for items in sq %}
+         <span class="INNER">{{items}}</span>
+         {% endfor %}
+      <h2>Result</h2>
+         <table class="table table-responsive">
+         <tr>
+            <th>Sites</th>
+            <th>links</th>
+            <th>Percentages</th>
+         </tr>
+         
+         {% for key, value in result.items() %}
+            
+            <tr>
+               <td><button type="button" class="btn btn-info" data-toggle="collapse" data-target=#{{demo}}{{loop.index}}>{{key}}</button>
+               <div id={{demo}}{{loop.index}} class="collapse">
+                  {% for items in value%}
+                  <span class ="OUTER">{{items}}</span>
+                  {% endfor %}
+               </div></td>
+               <td><a href={{ key }}>link</a></td>
+               <td>{{(value|length / sq|length) * 100}}</td>
+            </tr>
+            
+         {% endfor %}
+      </table>   
+      
+      
+   </div>
+   <script type="text/javascript">
+     $(document).ready(function(){
+    $(".OUTER").mouseenter(function(){
+        var txt=$(this).html()
+        $(this).addClass('hover')
+        $('.INNER').each(function(){
+            var text1=$(this).html()
+            if(txt.indexOf(text1)!=-1){
+               $(this).addClass('hover')
+               
+            }
+        })
+    });
+    $(".OUTER").mouseout(function(){
+        $('.INNER').each(function(){
+            $(this).removeClass('hover')
+        })
+        $(this).removeClass('hover')
+    });
+    
+   });
+  </script>    
+   </body>
+</html>
