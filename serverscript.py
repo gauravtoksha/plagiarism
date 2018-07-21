@@ -17,7 +17,7 @@ class SpiderHandler():
         
     def run_crawling(self):
         configure_logging({'LOG_FORMAT': '%(levelname)s: %(message)s'})
-        sys.path.append('BingScraperProject/BingScraper')        
+        sys.path.append('BingScraper/')        
         settings = Settings()
         os.environ['SCRAPY_SETTINGS_MODULE'] = 'BingScraper.settings'
         settings_module_path = os.environ['SCRAPY_SETTINGS_MODULE']
