@@ -18,11 +18,11 @@ class SearchManager():
             #needs to implement splash for this
             pass
         if self.engine=="yahoo":
-            pass
+            return "http://in.search.yahoo.com/search?q="
     
     def getLinks(self,response):
+        links=[]
         if self.engine=="bing":
-            links=[]
             try:
                 for items in response.css("li[class=b_algo]"):
                     item=items.css("a::attr(href)").extract()[0]
@@ -31,4 +31,9 @@ class SearchManager():
                 return links
             except Exception as e:
                 print("in search manager:"+str(e))
-            
+        if self.engine=="yahoo":
+        	try:
+        		links=response.css(".searchCenterMiddle").css("a.ac-algo::attr(href)").extract()
+        		return links
+        	except Exception as e:
+        		print(str(e))

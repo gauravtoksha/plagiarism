@@ -11,7 +11,7 @@ def index():
 @app.route('/submit/',methods=['POST'])
 def submit():
 	searchQuery=request.form['comment']
-	engine="bing"
+	engine=request.form['selector']
 	s=SpiderHandler(searchQuery,engine)
 	hashmap=s.run_crawling()
 	return render_template('result.html',result=hashmap,demo="demo",sq=searchQuery.split('.'))

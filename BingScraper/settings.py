@@ -16,7 +16,8 @@ NEWSPIDER_MODULE = 'BingScraper.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64)'
+#USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64)'
+USER_AGENT = 'MyBot'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
