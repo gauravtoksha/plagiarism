@@ -1,0 +1,8 @@
+1.add google and duckduckgo support
+2.add support for file uploads
+3.large document searching
+4.add a javascript engine
+5.handle pdf and other documents in response
+6.integrate similarity class
+7.add more measures of similarity
+8.add support for code detection
