@@ -7,11 +7,35 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+  	.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px; /* half width of the spinner gif */
+    margin-top: -50px; /* half height of the spinner gif */
+    text-align:center;
+    z-index:1234;
+    overflow: auto;
+    }
+  </style>
+  <script type="text/javascript">
+  	$(document).ready(function(){
+  		$('#usrform').submit(function() {
+		    $('#spinner').show(); // show animation
+		    $(':submit',this).attr('disabled','disabled');
+		    $('#submitbox').hide();
+		    return true; // allow regular form submission
+		});
+  	});
+  </script>
 </head>
 <body>
 
 <div class="container">
-  <h2>Work in Progress</h2>
+	<div class="page-header">
+  		<h2>Plagiarism Detection</h2>
+  	</div>
   <p>Paste it here!</p>
   <form action="http://127.0.0.1:5000/submit/" id="usrform" method="post">
     <div class="form-group">
@@ -23,11 +47,14 @@
         <option value="yahoo">Yahoo</option>
         <!-- <option value="3">Three</option> -->
       </select>
-      <div class="text-center">
+      <div id="submitbox" class="text-center">
         <input type="submit" class="btn btn-primary" value="Submit">
       </div>
     </div>
   </form>
+  <div id="spinner" class="spinner" style="display:none;">
+		    <img id="img-spinner" src="{{url_for('static',filename='spinner.gif')}}" alt="Loading"/>
+		</div>
 </div>
 
 </body>

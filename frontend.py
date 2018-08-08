@@ -1,4 +1,4 @@
-from flask import Flask,request,render_template
+from flask import Flask,request,render_template,url_for
 from serverscript import SpiderHandler
 import sys
 app = Flask(__name__)
